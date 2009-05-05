@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <script src="../src/jquery-1.3.2.min.js"></script>
+        <script src="../src/sub.bus.js"></script>
+        <link rel="stylesheet" href="testsuite.css" type="text/css" media="screen" />
+
+        <script>
+            $(document).ready(function(){
+
+                test("Should have one subscription after subscribing", function(){
+                    $.sub.reset()
+                    expect(1);
+                    $.sub.subscribe("some.event", function(obj){
+                        //do nothing
+                    });
+                    ok(document.subscriptions.length == 1,
+                        "there should be one event subscription in the subscriptions");
+                });
+
+                test("Should record right subscription", function(){
+                    $.sub.reset()
+                    expect(1);
+                    $.sub.subscribe("some.event", function(obj){
+                        //do nothing
+                    });
+                    ok(document.subscriptions[0].key == 'some.event',
+                        "the subscription for the event should have the key 'some.event'");
+                });
+
+                test("Should reset subscriptions", function(){
+                    $.sub.reset()
+                    expect(1);
+                    $.sub.subscribe("some.event", function(obj){
+                        //do nothing
+                    });
+                    $.sub.reset()
+                    ok(document.subscriptions.length == 0,
+                        "reset should clear all subscriptions");
+                });
+
+                test("Should publish event without anyone listening", function(){
+                    $.sub.reset()
+                    $.sub.publish("some.event");
+                });
+
+                test("Should publish event with one listener", function(){
+                    $.sub.reset()
+                    current_value = ""
+                    $.sub.subscribe("some.event", function(obj){
+                        current_value = obj;
+                    });
+                    $.sub.publish("some.event", "some value");
+                    
+                    equals(current_value, "some value");
+                });
+
+                test("Should publish event with many listeners", function(){
+                    expect(3);
+                    $.sub.reset()
+                    current_values = []
+                    $.sub.subscribe("some.event", function(obj){
+                        current_values.push(obj);
+                    });
+                    $.sub.subscribe("some.event", function(obj){
+                        current_values.push(obj);
+                    });
+                    $.sub.publish("some.event", "some value");
+                    
+                    equals(current_values.length, 2);
+                    equals(current_values[0], "some value");
+                    equals(current_values[1], "some value");
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+
+        <script type="text/javascript" src="testrunner.js"></script>
+        <h1>Sub buS test</h1>
+        <h2 id="banner"></h2>
+        <h2 id="userAgent"></h2>
+
+        <ol id="tests"></ol>
+
+        <div id="main"></div>
+
+    </body>
+</html>
+
