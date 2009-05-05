@@ -10,7 +10,7 @@ Sub.buS is tested using QUnit, so if you want to know more about the quality of 
 Using Sub.buS
 -------------
 
-Using Sub.buS is as easy as it gets. Just add the _sub.bus.js_ file to your page and use the methods below to subscribe, publish and/or reset the bus.
+Using Sub.buS is as easy as it gets. Just add the *sub.bus.js* file to your page and use the methods below to subscribe, publish and/or reset the bus.
 
 Subscribe
 =========
