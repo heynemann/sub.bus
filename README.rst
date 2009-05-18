@@ -28,7 +28,7 @@ Getting current subscriptions
 
 You shouldn't have to, but if you need to get the current subscriptions, just use the following syntax::
 
-    $.sub.get_subscriptions();
+    $.sub.getSubscriptions();
 
 You'll receive an array of subscriptions as the result. A subscription object has two properties: key and callback. 
 Key is the string that represents the event that triggers this subscription. Callback is the function that will 
