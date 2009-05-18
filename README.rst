@@ -23,6 +23,17 @@ The first parameter is the event key, meaning that when someone publishes an eve
 
 The second parameter is the callback function. This is the function that will get executed when the given event is published. The argument 'obj' to this function is the JSON object that gets passed as part of publishing. This parameter would contain relevant information on the event.
 
+Getting current subscriptions
+=============================
+
+You shouldn't have to, but if you need to get the current subscriptions, just use the following syntax::
+
+    $.sub.get_subscriptions();
+
+You'll receive an array of subscriptions as the result. A subscription object has two properties: key and callback. 
+Key is the string that represents the event that triggers this subscription. Callback is the function that will 
+be called when this event is triggered.
+
 Publish
 =======
 
