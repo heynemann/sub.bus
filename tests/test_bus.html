@@ -14,7 +14,7 @@
                     $.sub.subscribe("some.event", function(obj){
                         //do nothing
                     });
-                    ok(document.subscriptions.length == 1,
+                    ok($.sub.getSubscriptions().length == 1,
                         "there should be one event subscription in the subscriptions");
                 });
 
@@ -24,7 +24,7 @@
                     $.sub.subscribe("some.event", function(obj){
                         //do nothing
                     });
-                    ok(document.subscriptions[0].key == 'some.event',
+                    ok($.sub.getSubscriptions()[0].key == 'some.event',
                         "the subscription for the event should have the key 'some.event'");
                 });
 
@@ -35,7 +35,7 @@
                         //do nothing
                     });
                     $.sub.reset()
-                    ok(document.subscriptions.length == 0,
+                    ok($.sub.getSubscriptions().length == 0,
                         "reset should clear all subscriptions");
                 });
 

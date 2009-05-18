@@ -1,17 +1,23 @@
-document.subscriptions = []
+jQuery(function(){
+    $(document).data("subs", []);
+});
 
 jQuery.sub = {
     reset:function(){
-        document.subscriptions = []
+        $(document).data("subs", []);
+    },
+    getSubscriptions:function(){
+        return $(document).data("subs");
     },
     subscribe:function(event, callback) {
-        document.subscriptions.push({key: event, callback: callback})
+        jQuery.sub.getSubscriptions().push({key: event, callback: callback})
     },
     publish:function(event, obj){
-        for (i=0; i<document.subscriptions.length; i++){
-            subs = document.subscriptions[i];
-            if (subs.key == event){
-                subs.callback(obj);
+        subs = jQuery.sub.getSubscriptions();
+        for (i=0; i<subs.length; i++){
+            subscription = subs[i];
+            if (subscription.key == event){
+                subscription.callback(obj);
             }
         }
     },
