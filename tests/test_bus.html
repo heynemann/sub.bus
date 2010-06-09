@@ -27,6 +27,79 @@
                     ok($.sub.getSubscriptions()[0].key == 'some.event',
                         "the subscription for the event should have the key 'some.event'");
                 });
+                
+                test("Has subscription with a given reference", function(){
+                    $.sub.reset();
+                    expect(1);
+                    $.sub.subscribe("some.event", function(obj){
+                        //do nothing
+                    }, 'my_random_subscription');
+                    
+                    ok($.sub.hasSubscription('my_random_subscription'),
+                        "the subscription with given reference should exist [reference='my_random_subscription']");
+                });
+
+                test("If no subscription with given reference has been done return false", function(){
+                    $.sub.reset();
+                    expect(1);
+                    ok(!$.sub.hasSubscription('my_random_subscription'),
+                        "the subscription with given reference should not exist [reference='my_random_subscription']");
+                });
+
+                test("Should record right subscription with given reference", function(){
+                    $.sub.reset()
+                    expect(1);
+                    $.sub.subscribe("some.event", function(obj){
+                        //do nothing
+                    }, 'my_random_subscription');
+                    ok($.sub.getSubscriptions()[0].reference == 'my_random_subscription',
+                        "the subscription for the event should have the reference 'my_random_subscription'");
+                });
+
+                test("Should unsubscribe from a given event by reference", function(){
+                    $.sub.reset()
+                    expect(1);
+                    $.sub.subscribe("some.event", function(obj){
+                        //do nothing
+                    }, 'my_random_subscription');
+                    
+                    $.sub.unsubscribe("my_random_subscription");
+                    ok(! $.sub.hasSubscription("my_random_subscription"),
+                        "the event should have been unsubscribed [reference='my_random_subscription']");
+                });
+                
+                test("Should raise if the event with the given reference was not subscribed", function(){
+                    $.sub.reset()
+                    expect(1);
+                    try{
+                        $.sub.unsubscribe("my_random_subscription");
+                    }
+                    catch(error){
+                        ok(error==="The subscription with reference 'my_random_subscription' was not found");
+                    }
+                });
+
+                test("Should raise if the given reference is null in unsubscribe", function(){
+                    $.sub.reset()
+                    expect(1);
+                    try{
+                        $.sub.unsubscribe();
+                    }
+                    catch(error){
+                        ok(error==="The reference argument is required by unsubscribe.");
+                    }
+                });
+
+                test("Should raise if the given reference is null in hasSubscription", function(){
+                    $.sub.reset()
+                    expect(1);
+                    try{
+                        $.sub.hasSubscription();
+                    }
+                    catch(error){
+                        ok(error==="The reference argument is required by hasSubscription.");
+                    }
+                });
 
                 test("Should reset subscriptions", function(){
                     $.sub.reset()

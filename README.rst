@@ -23,6 +23,26 @@ The first parameter is the event key, meaning that when someone publishes an eve
 
 The second parameter is the callback function. This is the function that will get executed when the given event is published. The argument 'obj' to this function is the JSON object that gets passed as part of publishing. This parameter would contain relevant information on the event.
 
+You can also supply a third parameter called reference. This parameter is useful for finding out if a given subscription is already registered and/or unsubscribing from a given event. In order to subscribe an event with the reference argument, you can use this syntax::
+
+    $.sub.subscribe("event.key", function(obj) { //do something }, 'reference');
+
+Unsubscribe
+===========
+
+In order to unsubscribe to a previously subscribed event, all you have to do is call on::
+
+    $.sub.unsubscribe('my_event_reference');
+
+It's important to notice, though, that you can only unsubscribe to events with a known reference (refer to subscribe for more details).
+
+Find out if an event has been subscribed
+========================================
+
+If you registered your event with a reference (refer to subscribe for more details), you can find out if it has already been registered using hasSubscription, like this::
+
+    $.sub.hasSubscription('my_event_reference');
+
 Getting current subscriptions
 =============================
 

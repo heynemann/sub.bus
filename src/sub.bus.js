@@ -13,9 +13,42 @@
             this._debug({subscriptions:subscriptions});
             return subscriptions;
         },
-        subscribe:function(event, callback) {
-            this._debug({'subscribing' : event, callback : callback});
-            jQuery.sub.getSubscriptions().push({key: event, callback: callback})
+        subscribe:function(event, callback, reference) {
+            this._debug({'subscribing' : event, callback : callback, 'reference': reference});
+            jQuery.sub.getSubscriptions().push({key: event, callback: callback, reference: reference});
+        },
+        hasSubscription:function(reference) {
+            if(!reference){
+                throw("The reference argument is required by hasSubscription.");
+            }
+            subscriptions = jQuery.sub.getSubscriptions();
+            
+            subs = jQuery.sub.getSubscriptions();
+            for (i=0; i<subs.length; i++){
+                subscription = subs[i];
+                if (subscription.reference === reference){
+                    return true;
+                }
+            }
+            return false;
+        },
+        unsubscribe:function(reference){
+            
+            if(!reference){
+                throw("The reference argument is required by unsubscribe.");
+            }
+            
+            subscriptions = jQuery.sub.getSubscriptions();
+            
+            subs = jQuery.sub.getSubscriptions();
+            for (i=0; i<subs.length; i++){
+                subscription = subs[i];
+                if (subscription.reference === reference){
+                    subs.splice(i,1);
+                    return;
+                }
+            }
+            throw("The subscription with reference '" + reference + "' was not found");
         },
         publish:function(event, obj){
             this._debug({'publishing' : event, message : obj});
