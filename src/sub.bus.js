@@ -69,9 +69,11 @@
             this.options.debug = false;
         },
         _debug : function($obj){
-            if(!this.options.debug) {return;}
+            if(!this.options.debug) {
+                return;
+            }
             if (window.console && window.console.log){
-                window.console.log('[%s - sub.bus]',new Date(), $obj)
+                window.console.log('[%s - sub.bus]', new Date(), $obj);
             }
         }
     };
