@@ -22,7 +22,7 @@
                 throw("The reference argument is required by hasSubscription.");
             }
             subscriptions = jQuery.sub.getSubscriptions();
-            
+
             subs = jQuery.sub.getSubscriptions();
             for (i=0; i<subs.length; i++){
                 subscription = subs[i];
@@ -33,13 +33,13 @@
             return false;
         },
         unsubscribe:function(reference){
-            
+
             if(!reference){
                 throw("The reference argument is required by unsubscribe.");
             }
-            
+
             subscriptions = jQuery.sub.getSubscriptions();
-            
+
             subs = jQuery.sub.getSubscriptions();
             for (i=0; i<subs.length; i++){
                 subscription = subs[i];
